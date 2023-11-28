@@ -18,7 +18,6 @@ useEffect(() =>{
   .then(response => {
     console.log('Volume saved succeffuly:', response.data.volume);
   });
-
 },[volume]);
 
   return (
@@ -26,10 +25,26 @@ useEffect(() =>{
       <div>
       <h1>Settings</h1>
       <button className ="mb-20" onClick={() => {
-        setVolume(volume+1);
+
+        if(volume >= 10)
+        {
+          setVolume(10);
+        }
+        else
+        {
+          setVolume(volume+1);
+        }
       }}>Inc Volume</button>
         <button className ="mb-20" onClick={() => {
-       setVolume(volume-1);
+        if(volume <= 0)
+        {
+          setVolume(0);
+        }
+
+        else
+        {
+          setVolume(volume-1);
+        }
       }}>Dec Volume</button>
       <p>Volume: {volume}</p>
       </div>
