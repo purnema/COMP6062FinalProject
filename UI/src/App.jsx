@@ -4,6 +4,7 @@ import './App.css'
 
 function App() {
   const[volume, setVolume]= useState(5);
+  const[mute, setMute] = useState(0);
 
 useEffect(() =>{
   axios.get('/api/volume')
@@ -13,40 +14,53 @@ useEffect(() =>{
 
 useEffect(() =>{
   axios.put('/api/volume', {
-    volume: volume
+    volume: volume,
+    mute: mute
   })
   .then(response => {
-    console.log('Volume saved succeffuly:', response.data.volume);
+    console.log('System Muted', response.data.mute);
   });
-},[volume]);
+},[volume,mute]);
 
   return (
     <>
       <div>
       <h1>Settings</h1>
       <button className ="mb-20" onClick={() => {
-
-        if(volume >= 10)
+        if(!mute)
         {
-          setVolume(10);
+          if(volume >= 10)
+          {
+            setVolume(10);
+          }
+          else
+          {
+            setVolume(volume+1);
+          }
         }
-        else
-        {
-          setVolume(volume+1);
-        }
+        
       }}>Inc Volume</button>
-        <button className ="mb-20" onClick={() => {
-        if(volume <= 0)
+      <button className ="mb-20" onClick={() => {
+        if(!mute)
         {
-          setVolume(0);
+          if(volume <= 0)
+          {
+            setVolume(0);
+          }
+          else
+          {
+            setVolume(volume-1);
+          }
         }
 
-        else
-        {
-          setVolume(volume-1);
-        }
       }}>Dec Volume</button>
-      <p>Volume: {volume}</p>
+      <p>Volume: {mute?"muted":volume}</p>
+      <button className ="mb-20" onClick={() => {
+        setMute(!mute);
+      }}>Mute</button>
+      <button className ="mb-20" onClick={() => {
+        
+      }}>Bluetooth</button>
       </div>
     </>
   );

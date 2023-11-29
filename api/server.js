@@ -32,10 +32,6 @@ app.put('/api/volume', (req, res) => {
           res.status(500).send('Data file not found or corrupt');
         });
       })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).send('Data file not found or corrupt');
-      });
 });
 
 app.listen(port, () => {
