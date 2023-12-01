@@ -1,9 +1,31 @@
 const express = require('express');
+const { readFile } = require('fs').promises;
 const fsp = require('fs').promises;
 const app = express();
 const port = 5001;
 
 app.use(express.json());
+
+app.get('/api/playlist', async (req, res) => {
+  try {
+    const data = await fsp.readFile('data.json', 'utf-8');
+    const { playlist } = JSON.parse(data);
+
+    // Check if there is a query parameter for the next song
+    const { nextSongId } = req.query;
+
+    // If a specific song ID is requested, find it; otherwise, return the entire playlist
+    if (nextSongId) {
+      const nextSong = playlist.find(song => song.id === parseInt(nextSongId));
+      res.json({ nextSong });
+    } else {
+      res.json({ playlist });
+    }
+  } catch (error) {
+    console.error('Error reading data.json:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 app.get('/api/volume', (req, res, next) => {
   fsp.readFile('data.json')
