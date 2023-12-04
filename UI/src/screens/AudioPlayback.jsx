@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Volume from '../components/volume';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const fetchPlaylist = async () => {
     try {
@@ -9,7 +10,7 @@ const fetchPlaylist = async () => {
         throw new Error('Failed to fetch playlist');
       }
       const data = await response.json();
-      console.log('Fetched playlist:', data.playlist); // Add this line
+      console.log('Fetched playlist:', data.playlist);
       return data.playlist;
     } catch (error) {
       console.error('Error fetching playlist:', error);
@@ -18,12 +19,16 @@ const fetchPlaylist = async () => {
   };
 
   const AudioPlayback = () => {
+
+
   const [playlist, setPlaylist] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [currentSong, setCurrentSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
   const audioRef = React.useRef(new Audio());
+  const [connectedDevice, setConnectedDevice] = useState(null);
+
 
   useEffect(() => {
     axios.get('http://localhost:5173/api/volume')
@@ -92,10 +97,29 @@ const fetchPlaylist = async () => {
       }
     }
   }, [currentSongIndex, playlist, isPlaying]);
+  const fetchConnectedDevice = () => {
+    // Assuming an API endpoint that provides information about the connected Bluetooth device
+    axios.get('/api/bluetooth/connectedDevice')
+      .then(response => {
+        setConnectedDevice(response.data.connectedDevice);
+      })
+      .catch(error => {
+        console.error('Error fetching connected device:', error);
+      });
+  };
+
+  useEffect(() => {
+    fetchConnectedDevice();
+  }, []);
 
   return (
     <>
       <div>
+      {connectedDevice ? (
+          <p>Connected Bluetooth Device: {connectedDevice.name}</p>
+        ) : (
+          <p>No Connected Bluetooth Device</p>
+        )}
       {currentSong ? (
           <>
             <p>Title: {currentSong.title}</p>
@@ -113,6 +137,7 @@ const fetchPlaylist = async () => {
         <button onClick={toggleLoop}>{isLooping ? 'Disable Loop' : 'Enable Loop'}</button>
         <button onClick={nextTrack}>Next Track</button>
         <button onClick={restartTrack}>Restart Track</button>
+
       </div>
     </>
   );

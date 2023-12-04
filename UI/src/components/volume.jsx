@@ -54,9 +54,7 @@ const Volume = () => {
           <button className ="mb-20" onClick={() => {
             setMute(!mute);
           }}>Mute</button>
-          
-          <button className ="mb-20" onClick={() => { 
-          }}>Bluetooth</button>
+ <div style={{ height: '10px', width: `${volume * 10}px`, backgroundColor: 'blue', borderBlock:"black" }} />
     </div>
     );
 }

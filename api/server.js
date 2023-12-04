@@ -56,6 +56,26 @@ app.put('/api/volume', (req, res) => {
       })
 });
 
+app.get('/api/bluetooth', (req, res) => {
+  readFile('data.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading data.json:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+
+    try {
+      const jsonData = JSON.parse(data);
+      const devices = jsonData.bluetooth.devices;
+      res.json({ devices });
+    } catch (error) {
+      console.error('Error parsing JSON:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+});
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
