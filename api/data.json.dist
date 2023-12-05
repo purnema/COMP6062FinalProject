@@ -31,5 +31,30 @@
         "title": "Despacito",
         "artist": "Luis Fonsi",
         "albumArt": "https://images.genius.com/d01f15b3cec316f3baef2fb637ef8305.1000x1000x1.jpg"
-    }]
+    }],
+        "bluetooth": {
+        "connectedDevice": null,
+        "devices": [
+            {
+                "id": 1,
+                "name": "Speakers",
+                "type": "Audio"
+            },
+            {
+                "id": 2,
+                "name": "Earphones",
+                "type": "Audio"
+            },
+            {
+                "id": 3,
+                "name": "Smartwatch",
+                "type": "Wearable"
+            }
+            {
+                "id": 4,
+                "name": "Ipods",
+                "type": "Audio"
+            }
+        ]
+    }
 }

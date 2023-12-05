@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Volume from '../components/volume';
 import axios from 'axios';
+import Volume from '../components/volume';
+
 
 const fetchPlaylist = async () => {
     try {
@@ -9,7 +10,7 @@ const fetchPlaylist = async () => {
         throw new Error('Failed to fetch playlist');
       }
       const data = await response.json();
-      console.log('Fetched playlist:', data.playlist); // Add this line
+      console.log('Fetched playlist:', data.playlist);
       return data.playlist;
     } catch (error) {
       console.error('Error fetching playlist:', error);
@@ -28,16 +29,14 @@ const fetchPlaylist = async () => {
   useEffect(() => {
     axios.get('http://localhost:5173/api/volume')
       .then(response => {
-        // Handle the volume data
         console.log(response.data);
       })
       .catch(error => {
-        // Handle errors
         console.error('Error fetching volume:', error);
       });
-  }, []); // Empty dependency array for componentDidMount behavior
-  
-  useEffect(() => {
+  }, []);
+
+    useEffect(() => {
     fetchPlaylist().then(data => {
       setPlaylist(data);
       setCurrentSong(data[currentSongIndex]);

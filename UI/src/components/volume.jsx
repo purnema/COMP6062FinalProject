@@ -20,6 +20,7 @@ const Volume = () => {
       console.log('System Muted', response.data.mute);
     });
   },[volume,mute]);
+  
     return ( 
     <div> 
         <button className ="mb-20" onClick={() => {
@@ -55,8 +56,6 @@ const Volume = () => {
             setMute(!mute);
           }}>Mute</button>
           
-          <button className ="mb-20" onClick={() => { 
-          }}>Bluetooth</button>
     </div>
     );
 }
