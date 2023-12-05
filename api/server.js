@@ -56,6 +56,36 @@ app.put('/api/volume', (req, res) => {
       })
 });
 
+app.get('/api/bluetooth', (req, res, next) => {
+  fsp.readFile('data.json')
+    .then((data) => {
+      const json = JSON.parse(data);
+      res.send(json.bluetooth);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Data file not found or corrupt');
+    });
+});
+
+app.put('/api/bluetooth', (req, res, next) => {
+  fsp.readFile('data.json')
+    .then((data) => {
+      const json = JSON.parse(data);
+
+      // Get the connected file
+      json.bluetooth.connectedDevice = Number(req.body.connectedDevice);
+      fsp.writeFile('data.json', JSON.stringify(json))
+      .then(() => {
+        res.send({ connectedDevice: json.bluetooth.connectedDevice });
+      })
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Data file not found or corrupt');
+    });
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
