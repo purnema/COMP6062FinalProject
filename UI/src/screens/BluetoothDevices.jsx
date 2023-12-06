@@ -1,47 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const BluetoothDevices = () => {
-    const[devices, setDevices]= useState([]);
-    const[connect, setConnect] = useState('');
-    const connectTo = (deviceId) => {
-        setConnect(deviceId);
+  const [devices, setDevices] = useState([]);
+  const [connect, setConnect] = useState("");
 
-        axios.put('/api/bluetooth', {
-            connectedDevice: deviceId
-          })
-          .then(response => {
-            console.log('Connected', response.data.connectedDevice);
-          });
-      };
+  const connectTo = (deviceId) => {
+    setConnect(deviceId);
 
-    useEffect(() => {
-        axios.get('/api/bluetooth')
-          .then(response => {
-            console.log(response.data);
-            setDevices(response.data.devices);
-            setConnect(response.data.connectedDevice)
-          })
-          .catch(error => {
-            console.error('Error fetching bluetooth', error);
-          });
-      }, []);
+    axios
+      .put("/api/bluetooth", {
+        connectedDevice: deviceId,
+      })
+      .then((response) => {
+        console.log("Connected", response.data.connectedDevice);
+      });
+  };
 
-    return ( 
-        <>
-        <div>Bluetooth Devices</div>
-        <ul>
-            {devices.filter((device) => 
-            device.type =='Audio'
-            ).map((device) => (
-                <li key={device.id}>{device.name}
-                <button onClick={() => connectTo(device.id)}>{connect === device.id ? 'Disconnect' : 'Connect'}</button>
-                </li>
-            ))}
-        </ul>
-        </>
+  useEffect(() => {
+    axios
+      .get("/api/bluetooth")
+      .then((response) => {
+        console.log(response.data);
+        setDevices(response.data.devices);
+        setConnect(response.data.connectedDevice);
+      })
+      .catch((error) => {
+        console.error("Error fetching bluetooth", error);
+      });
+  }, []);
 
-     );
-}
- 
+  return (
+    <>
+      <div>Bluetooth Devices</div>
+      <ul>
+        {devices
+          .filter((device) => device.type == "Audio")
+          .map((device) => (
+            <p key={device.id}>
+              {device.name}
+              <button onClick={() => connectTo(device.id)}>
+                {connect === device.id ? "Disconnect" : "Connect"}
+              </button>
+            </p>
+          ))}
+      </ul>
+    </>
+  );
+};
+
 export default BluetoothDevices;

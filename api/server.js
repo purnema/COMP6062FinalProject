@@ -68,6 +68,7 @@ app.get('/api/bluetooth', (req, res, next) => {
     });
 });
 
+
 app.put('/api/bluetooth', (req, res, next) => {
   fsp.readFile('data.json')
     .then((data) => {
