@@ -1,40 +1,12 @@
 {
-    "volume": 5,
-    "mute": 0
-    "playlist":
-    [{
-        "id": 1,
-        "title": "Count on Me",
-        "artist": "Bruno Mars",
-        "albumArt": "https://img.youtube.com/vi/Msl2fl3h59I/maxresdefault.jpg"
-    },
-    {
-        "id": 2,
-        "title": "Flowers",
-        "artist": "Miley Cyrus",
-        "albumArt": "https://i.etsystatic.com/38926250/r/il/d09ba5/4617136137/il_1140xN.4617136137_i36m.jpg"
-    },
-    {
-        "id": 3,
-        "title": "Wake Me up",
-        "artist": "Avicii",
-        "albumArt": "https://i1.sndcdn.com/artworks-000080966184-30zyep-t500x500.jpg"
-    },
-    {
-        "id": 4,
-        "title": "Tourner Dans Le Vide",
-        "artist": "Indila",
-        "albumArt": "https://i1.sndcdn.com/artworks-iElJitzPVSxKzMl8-JAK4VQ-t500x500.jpg"
-    },
-    {
-        "id": 5,
-        "title": "Despacito",
-        "artist": "Luis Fonsi",
-        "albumArt": "https://images.genius.com/d01f15b3cec316f3baef2fb637ef8305.1000x1000x1.jpg"
-    }],
-        "bluetooth": {
-        "connectedDevice": null,
+    "bluetooth": {
+        "connectedDevice": 1,
         "devices": [
+            {
+                "id": 0,
+                "name": "None",
+                "type": "Audio"
+            },
             {
                 "id": 1,
                 "name": "Speakers",
@@ -49,12 +21,51 @@
                 "id": 3,
                 "name": "Smartwatch",
                 "type": "Wearable"
-            }
+            },
             {
                 "id": 4,
                 "name": "Ipods",
                 "type": "Audio"
+            },
+            {
+                "id": 5,
+                "name": "TV",
+                "type": "Audio"
             }
         ]
-    }
+    },
+    "playlist": [
+        {
+            "id": 1,
+            "title": "Count on Me",
+            "artist": "Bruno Mars",
+            "albumArt": "https://img.youtube.com/vi/Msl2fl3h59I/maxresdefault.jpg"
+        },
+        {
+            "id": 2,
+            "title": "Flowers",
+            "artist": "Miley Cyrus",
+            "albumArt": "https://i.etsystatic.com/38926250/r/il/d09ba5/4617136137/il_1140xN.4617136137_i36m.jpg"
+        },
+        {
+            "id": 3,
+            "title": "Wake Me up",
+            "artist": "Avicii",
+            "albumArt": "https://i1.sndcdn.com/artworks-000080966184-30zyep-t500x500.jpg"
+        },
+        {
+            "id": 4,
+            "title": "Tourner Dans Le Vide",
+            "artist": "Indila",
+            "albumArt": "https://i1.sndcdn.com/artworks-iElJitzPVSxKzMl8-JAK4VQ-t500x500.jpg"
+        },
+        {
+            "id": 5,
+            "title": "Despacito",
+            "artist": "Luis Fonsi",
+            "albumArt": "https://images.genius.com/d01f15b3cec316f3baef2fb637ef8305.1000x1000x1.jpg"
+        }
+    ],
+    "volume": 5,
+    "mute": 0
 }

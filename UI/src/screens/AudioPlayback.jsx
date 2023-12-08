@@ -32,7 +32,27 @@ const AudioPlayback = () => {
   const [currentSong, setCurrentSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
+  const [currentdev, setCurrentDev] = useState({
+    id: 0,
+    name: "n/a",
+    type: "n/a",
+  });
   const audioRef = React.useRef(new Audio());
+  useEffect(() => {
+    axios
+      .get("/api/bluetooth")
+      .then((response) => {
+        console.log(response.data);
+        setCurrentDev(
+          response.data.devices.find(
+            (device) => device.id === response.data.connectedDevice
+          )
+        );
+      })
+      .catch((error) => {
+        console.error("Error fetching bluetooth", error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -103,6 +123,7 @@ const AudioPlayback = () => {
   return (
     <>
       <div>
+        <p>Currently connected to : {currentdev.name}</p>
         {currentSong ? (
           <>
             <p>Title: {currentSong.title}</p>
